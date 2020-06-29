@@ -1,48 +1,19 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 import { 
+  View, 
   StyleSheet, 
 } from 'react-native';
 
-import SplashScreen from './Screens/SplashScreen'
-import RegisterScreen from './Screens/RegisterScreen'
-import LoginScreen from './Screens/LoginScreen'
-import HomeScreen from './Screens/HomeScreen'
-
-const Stack = createStackNavigator();
-
-function App() {
+const HomeScreen = props => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator 
-        initialRouteName="Splash">
-        <Stack.Screen 
-          name="Splash" 
-          component={SplashScreen} 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="Register" 
-          component={RegisterScreen} 
-          options={{ title: 'Register Account' }} 
-        />
-        <Stack.Screen 
-          name="Login" 
-          component={LoginScreen} 
-          options={{ title: 'Login' }} 
-        />
-        <Stack.Screen 
-          name="Home" 
-          component={HomeScreen} 
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={ styles.root }>
+      
+    </View>
   );
 }
 
-export default App;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   root: {

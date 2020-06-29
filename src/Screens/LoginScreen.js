@@ -1,48 +1,54 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { useState } from 'react';
 
-import { 
+import {
   StyleSheet, 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
 } from 'react-native';
 
-import SplashScreen from './Screens/SplashScreen'
-import RegisterScreen from './Screens/RegisterScreen'
-import LoginScreen from './Screens/LoginScreen'
-import HomeScreen from './Screens/HomeScreen'
+const LoginScreen = props => {
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
+  
+  const login = () => {
+    if (!email || !password) {
+      alert('Please fill all the items');
+    } else {
+      props.navigation.replace('Home')
+    }
+  }
 
-const Stack = createStackNavigator();
-
-function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator 
-        initialRouteName="Splash">
-        <Stack.Screen 
-          name="Splash" 
-          component={SplashScreen} 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="Register" 
-          component={RegisterScreen} 
-          options={{ title: 'Register Account' }} 
-        />
-        <Stack.Screen 
-          name="Login" 
-          component={LoginScreen} 
-          options={{ title: 'Login' }} 
-        />
-        <Stack.Screen 
-          name="Home" 
-          component={HomeScreen} 
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={ styles.root }>
+      <Text>Email</Text>
+      <TextInput
+        style={ styles.oneLineInputText }
+        onChangeText={text => setEmail(text)}
+      />
+      <Text>Password</Text>
+      <TextInput
+        style={ styles.oneLineInputText }
+        onChangeText={text => setPassword(text)}
+      />
+      <TouchableOpacity
+        style={ styles.largeButton }
+        onPress={() => login()}
+        activeOpacity={0.5}>
+        <Text style={styles.largeButtonText}>Login</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={ styles.smallButton }
+        onPress={() => props.navigation.navigate('Register')}
+        activeOpacity={0.5}>
+        <Text style={styles.smallButtonText}>Register new Account</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
-export default App;
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   root: {
@@ -90,12 +96,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 7,
     fontSize: 12,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   oneLineInputText: {
     padding: 10,
