@@ -1,7 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
+import { Net, } from './httpClient/request'
+
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  Button, 
+  FlatList, 
+  StyleSheet, 
+  TouchableOpacity, 
+  ScrollView,
+} from 'react-native';
 
 import {
   Colors,
@@ -25,8 +37,29 @@ function RegisterScreen({ navigation }) {
   let [clinicName, setClinicName] = useState('');
   let [phoneNumber, setPhoneNumber] = useState('');
   let [address, setAddress] = useState('');
+
+  const register = () => {
+    if (!email || !password || !clinicName || !phoneNumber || !address) {
+      alert('Please fill all the items');
+    } else {
+      apiRegister();
+    }
+  }
+
+  const apiRegister = () => {
+    Net('/posts', { userId: '12345', name: 'basil' })
+      .then(res => {
+        
+        navigation.goBack();
+      })
+      .catch(err => {
+        
+      })
+  }
+
   return (
     <View style={ styles.root }>
+      <ScrollView keyboardShouldPersistTaps="handled">
       <Text>Email</Text>
       <TextInput
         style={ styles.oneLineInputText }
@@ -54,15 +87,19 @@ function RegisterScreen({ navigation }) {
       />
       <TouchableOpacity
         style={ styles.largeButton }
-        onPress={() => navigation.goBack()}
+        onPress={() => register()}
         activeOpacity={0.5}>
-        <Text style={styles.buttonText}>Register</Text>
+        <Text style={styles.largeButtonText}>Register</Text>
       </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 }
 
 function LoginScreen({ navigation }) {
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
+  
   return (
     <View style={ styles.root }>
       <Text>Email</Text>
@@ -79,13 +116,13 @@ function LoginScreen({ navigation }) {
         style={ styles.largeButton }
         onPress={() => navigation.replace('Home')}
         activeOpacity={0.5}>
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.largeButtonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={ styles.smallButton }
         onPress={() => navigation.navigate('Register')}
         activeOpacity={0.5}>
-        <Text style={styles.buttonText}>Register new Account</Text>
+        <Text style={styles.smallButtonText}>Register new Account</Text>
       </TouchableOpacity>
     </View>
   );
@@ -146,7 +183,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     color: '#FFFFFF',
     borderColor: '#000000',
-    height: 40,
+    height: 50,
     alignItems: 'center',
     borderRadius: 5,
     marginTop: 20,
@@ -157,18 +194,25 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     color: '#FFFFFF',
     borderColor: '#000000',
-    height: 40,
+    height: 30,
     alignItems: 'center',
     borderRadius: 20,
-    marginLeft: 35,
-    marginRight: 35,
-    marginTop: 20,
+    marginLeft: 50,
+    marginRight: 50,
+    marginTop: 10,
     marginBottom: 20,
   },
-  buttonText: {
+  largeButtonText: {
     color: '#FFFFFF',
+    alignItems: 'center',
     paddingVertical: 10,
     fontSize: 16,
+  },
+  smallButtonText: {
+    color: '#FFFFFF',
+    alignItems: 'center',
+    paddingVertical: 7,
+    fontSize: 12,
   },
   container: {
     flex: 1,
