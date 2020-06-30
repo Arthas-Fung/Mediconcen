@@ -1,14 +1,185 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { 
   View, 
   StyleSheet, 
+  FlatList,
+  Text,
 } from 'react-native';
 
+const clinicList = [
+  {
+    id: '1',
+    doctorName: 'Ben',
+    patientName: 'Kenny',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '300',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+  {
+    id: '2',
+    doctorName: 'Peter',
+    patientName: 'Alan',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '350',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+  {
+    id: '3',
+    doctorName: 'Robin',
+    patientName: 'John',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '320',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+  {
+    id: '4',
+    doctorName: 'Robin',
+    patientName: 'John',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '320',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+  {
+    id: '5',
+    doctorName: 'Robin',
+    patientName: 'John',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '320',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+  {
+    id: '6',
+    doctorName: 'Robin',
+    patientName: 'John',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '320',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+  {
+    id: '7',
+    doctorName: 'Robin',
+    patientName: 'John',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '320',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+  {
+    id: '8',
+    doctorName: 'Robin',
+    patientName: 'John',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '320',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+  {
+    id: '9',
+    doctorName: 'Robin',
+    patientName: 'John',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '320',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+  {
+    id: '10',
+    doctorName: 'Robin',
+    patientName: 'John',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '320',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+  {
+    id: '11',
+    doctorName: 'Robin',
+    patientName: 'John',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '320',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+  {
+    id: '12',
+    doctorName: 'Robin',
+    patientName: 'John',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '320',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+  {
+    id: '13',
+    doctorName: 'Robin',
+    patientName: 'John',
+    diagnosis: '',
+    medication: '',
+    consultationFee: '320',
+    dateTime: '',
+    followUpConsultation: '',
+  },
+];
+
+const Item = ({ item }) => {
+  return (
+    <View style={styles.listItem}>
+      <Text style={styles.listItemTitle}>Doctor Name: {item.doctorName}</Text>
+      <Text style={styles.listItemTitle}>Patient Name: {item.patientName}</Text>
+    </View>
+  );
+}
+
 const HomeScreen = props => {
+  let [refresh, setRefresh] = useState(false);
+
+  const refreshHandle = () => {
+    setRefresh(true);
+  }
+
+  const loadMoreHandle = () => {
+    alert('Reached End');
+  }
+
+  const renderItem = ({ item }) => (
+    <Item item={item} />
+  );
+
   return (
     <View style={ styles.root }>
-      
+      <Text>Clinic List</Text>
+      <FlatList
+        data={clinicList}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        refreshing={refresh}
+        onRefresh={() => refreshHandle()}
+        onEndReachedThreshold={0.5}
+        onEndReached={({ distanceFromEnd }) => {
+          if(distanceFromEnd >= 0) {
+            loadMoreHandle();
+          }
+          }}
+      />
     </View>
   );
 }
@@ -22,64 +193,18 @@ const styles = StyleSheet.create({
   },
   alignCenter: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  largeButton: {
-    backgroundColor: '#000000',
-    borderWidth: 0,
-    color: '#FFFFFF',
-    borderColor: '#000000',
-    height: 50,
-    alignItems: 'center',
-    borderRadius: 5,
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  smallButton: {
-    backgroundColor: '#000000',
-    borderWidth: 0,
-    color: '#FFFFFF',
-    borderColor: '#000000',
-    height: 30,
-    alignItems: 'center',
-    borderRadius: 20,
-    marginLeft: 50,
-    marginRight: 50,
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  largeButtonText: {
-    color: '#FFFFFF',
-    alignItems: 'center',
-    paddingVertical: 10,
-    fontSize: 16,
-  },
-  smallButtonText: {
-    color: '#FFFFFF',
-    alignItems: 'center',
-    paddingVertical: 7,
-    fontSize: 12,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  oneLineInputText: {
+  listItem: {
+    backgroundColor: '#000',
     padding: 10,
-    marginTop: 5,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderRadius: 5,
+    marginVertical: 5,
+    marginHorizontal: 5,
   },
-  multiLineInputText: {
-    padding: 10,
-    marginTop: 5,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderRadius: 5,
-  }
+  listItemTitle: {
+    color: '#FFF',
+    fontSize: 18,
+  },
 });
