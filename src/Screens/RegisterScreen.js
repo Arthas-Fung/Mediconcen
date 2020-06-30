@@ -18,7 +18,7 @@ const RegisterScreen = props => {
   let [phoneNumber, setPhoneNumber] = useState('');
   let [address, setAddress] = useState('');
 
-  const register = () => {
+  const registerHandle = () => {
     if (!email || !password || !clinicName || !phoneNumber || !address) {
       alert('Please fill all the items');
     } else {
@@ -27,12 +27,17 @@ const RegisterScreen = props => {
   }
 
   const apiRegister = () => {
-    Net('/posts', { userId: '12345', name: 'basil' })
+    Net('/posts', { 
+      email: email, 
+      password: password, 
+      clinicName: clinicName, 
+      phoneNumber: phoneNumber, 
+      address: address })
       .then(res => {
         props.navigation.goBack();
       })
       .catch(err => {
-        
+        alert('Something went wrong');
       })
   }
 
@@ -66,7 +71,7 @@ const RegisterScreen = props => {
       />
       <TouchableOpacity
         style={ styles.largeButton }
-        onPress={() => register()}
+        onPress={() => registerHandle()}
         activeOpacity={0.5}>
         <Text style={styles.largeButtonText}>Register</Text>
       </TouchableOpacity>

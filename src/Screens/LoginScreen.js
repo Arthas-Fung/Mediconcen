@@ -8,16 +8,30 @@ import {
   TouchableOpacity, 
 } from 'react-native';
 
+import { Net, } from '../httpClient/request'
+
 const LoginScreen = props => {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
   
-  const login = () => {
+  const loginHandle = () => {
     if (!email || !password) {
       alert('Please fill all the items');
     } else {
-      props.navigation.replace('Home')
+      apiLogin();
     }
+  }
+
+  const apiLogin = () => {
+    Net('/posts', { 
+      email: email, 
+      password: password })
+      .then(res => {
+        props.navigation.replace('Home')
+      })
+      .catch(err => {
+        alert('Something went wrong');
+      })
   }
 
   return (
@@ -34,7 +48,7 @@ const LoginScreen = props => {
       />
       <TouchableOpacity
         style={ styles.largeButton }
-        onPress={() => login()}
+        onPress={() => loginHandle()}
         activeOpacity={0.5}>
         <Text style={styles.largeButtonText}>Login</Text>
       </TouchableOpacity>
