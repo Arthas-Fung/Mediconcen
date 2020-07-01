@@ -9,7 +9,7 @@ import {
 
 var itemCount = 0;
 
-const RecordScreen = props => {
+function RecordScreen(props) {
   let [refresh, setRefresh] = useState(false);
   const { id, doctorName, patientName } = props.route.params;
   console.log(id);

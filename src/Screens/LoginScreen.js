@@ -10,7 +10,7 @@ import {
 
 import { Net, } from '../httpClient/request'
 
-const LoginScreen = props => {
+function LoginScreen(props) {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
   

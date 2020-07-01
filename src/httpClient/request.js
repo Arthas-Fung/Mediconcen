@@ -1,16 +1,16 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com',
+    baseURL: 'https://jsonplaceholder.typicode.com/',
     timeout: 2000,
-    headers: {'X-Custom-Header': 'foobar'}
+    headers: {'content-type': 'application/json'}
 });
 
-export const Net = async (api, params) => {
-  return await instance.post(api, params)
+export const Net = (api, params) => {
+  return instance.get(api, params)
   .then(function (response) {
-    console.log(response);
-    // return response;
+    console.log(response.data);
+    return response.data;
   })
   .catch(function (error) {
     console.log(error);

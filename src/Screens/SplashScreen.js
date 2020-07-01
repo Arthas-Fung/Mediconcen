@@ -6,7 +6,7 @@ import {
   Text, 
 } from 'react-native';
 
-const SplashScreen = props => {
+function SplashScreen(props) {
   setTimeout(() => {
     props.navigation.replace('Login');
   }, 2000);

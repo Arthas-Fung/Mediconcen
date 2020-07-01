@@ -11,7 +11,7 @@ import {
 
 import { Net, } from '../httpClient/request'
 
-const RegisterScreen = props => {
+function RegisterScreen(props) {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
   let [clinicName, setClinicName] = useState('');

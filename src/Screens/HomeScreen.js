@@ -66,7 +66,7 @@ const HomeScreen = props => {
       <FlatList
         data={clinicList}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => 'key' + item.id}
         refreshing={refresh}
         onRefresh={() => refreshHandle()}
         onEndReachedThreshold={0.5}
