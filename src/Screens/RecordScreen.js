@@ -11,12 +11,13 @@ var itemCount = 0;
 
 const RecordScreen = props => {
   let [refresh, setRefresh] = useState(false);
-  const { id } = props.route.params;
+  const { id, doctorName, patientName } = props.route.params;
   console.log(id);
   return (
     <View style={ styles.root }>
-      <Text>Record Page</Text>
-      
+      <Text>record id: {id}</Text>
+      <Text>Doctor Name: {doctorName}</Text>
+      <Text>Patient Name: {patientName}</Text>
     </View>
   );
 }
