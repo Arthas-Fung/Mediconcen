@@ -19,7 +19,7 @@ const HomeScreen = props => {
       <View style={styles.listItem}>
         <TouchableOpacity
           style={ styles.largeButton }
-          onPress={() => props.navigation.navigate('Record')}
+          onPress={() => props.navigation.navigate('Record', {id: item.id})}
           activeOpacity={0.5}>
           <Text style={styles.listItemTitle}>Doctor Name: {item.doctorName}</Text>
         <Text style={styles.listItemTitle}>Patient Name: {item.patientName}</Text>

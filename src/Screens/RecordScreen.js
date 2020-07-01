@@ -11,7 +11,8 @@ var itemCount = 0;
 
 const RecordScreen = props => {
   let [refresh, setRefresh] = useState(false);
-
+  const { id } = props.route.params;
+  console.log(id);
   return (
     <View style={ styles.root }>
       <Text>Record Page</Text>

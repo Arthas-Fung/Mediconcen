@@ -9,7 +9,7 @@ const instance = axios.create({
 export const Net = async (api, params) => {
   return await instance.post(api, params)
   .then(function (response) {
-    console.log(response.data);
+    console.log(response);
     // return response;
   })
   .catch(function (error) {
