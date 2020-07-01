@@ -27,7 +27,7 @@ const LoginScreen = props => {
       email: email, 
       password: password })
       .then(res => {
-        props.navigation.replace('Home')
+        props.navigation.replace('Home');
       })
       .catch(err => {
         alert('Something went wrong');
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   alignCenter: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
   },

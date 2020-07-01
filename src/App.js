@@ -10,6 +10,7 @@ import SplashScreen from './Screens/SplashScreen'
 import RegisterScreen from './Screens/RegisterScreen'
 import LoginScreen from './Screens/LoginScreen'
 import HomeScreen from './Screens/HomeScreen'
+import RecordScreen from './Screens/RecordScreen'
 
 const Stack = createStackNavigator();
 
@@ -36,6 +37,10 @@ function App() {
         <Stack.Screen 
           name="Home" 
           component={HomeScreen} 
+        />
+        <Stack.Screen 
+          name="Record" 
+          component={RecordScreen} 
         />
       </Stack.Navigator>
     </NavigationContainer>

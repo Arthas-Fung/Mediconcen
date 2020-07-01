@@ -5,164 +5,60 @@ import {
   StyleSheet, 
   FlatList,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 
-const clinicList = [
-  {
-    id: '1',
-    doctorName: 'Ben',
-    patientName: 'Kenny',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '300',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-  {
-    id: '2',
-    doctorName: 'Peter',
-    patientName: 'Alan',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '350',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-  {
-    id: '3',
-    doctorName: 'Robin',
-    patientName: 'John',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '320',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-  {
-    id: '4',
-    doctorName: 'Robin',
-    patientName: 'John',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '320',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-  {
-    id: '5',
-    doctorName: 'Robin',
-    patientName: 'John',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '320',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-  {
-    id: '6',
-    doctorName: 'Robin',
-    patientName: 'John',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '320',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-  {
-    id: '7',
-    doctorName: 'Robin',
-    patientName: 'John',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '320',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-  {
-    id: '8',
-    doctorName: 'Robin',
-    patientName: 'John',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '320',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-  {
-    id: '9',
-    doctorName: 'Robin',
-    patientName: 'John',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '320',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-  {
-    id: '10',
-    doctorName: 'Robin',
-    patientName: 'John',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '320',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-  {
-    id: '11',
-    doctorName: 'Robin',
-    patientName: 'John',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '320',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-  {
-    id: '12',
-    doctorName: 'Robin',
-    patientName: 'John',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '320',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-  {
-    id: '13',
-    doctorName: 'Robin',
-    patientName: 'John',
-    diagnosis: '',
-    medication: '',
-    consultationFee: '320',
-    dateTime: '',
-    followUpConsultation: '',
-  },
-];
-
-const Item = ({ item }) => {
-  return (
-    <View style={styles.listItem}>
-      <Text style={styles.listItemTitle}>Doctor Name: {item.doctorName}</Text>
-      <Text style={styles.listItemTitle}>Patient Name: {item.patientName}</Text>
-    </View>
-  );
-}
+var itemCount = 0;
 
 const HomeScreen = props => {
   let [refresh, setRefresh] = useState(false);
+  let clinicList = [];
+
+  const ListItem = ({ item }) => {
+    return (
+      <View style={styles.listItem}>
+        <TouchableOpacity
+          style={ styles.largeButton }
+          onPress={() => props.navigation.navigate('Record')}
+          activeOpacity={0.5}>
+          <Text style={styles.listItemTitle}>Doctor Name: {item.doctorName}</Text>
+        <Text style={styles.listItemTitle}>Patient Name: {item.patientName}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   const refreshHandle = () => {
-    setRefresh(true);
+    // setRefresh(true);
   }
 
   const loadMoreHandle = () => {
     alert('Reached End');
+    // initClinicList();
   }
 
   const renderItem = ({ item }) => (
-    <Item item={item} />
+    <ListItem item = {item} />
   );
+
+  const initClinicList = () => {
+    for (let i=0 ;i<20; i++) {
+      let clinic = {
+        id: itemCount,
+        doctorName: 'Arthas',
+        patientName: 'Ben',
+        diagnosis: '',
+        medication: '',
+        consultationFee: '250',
+        dateTime: '', 
+        followUpConsultation: '',
+      }
+      clinicList.push(clinic);
+      itemCount++;
+    }
+  }
+
+  initClinicList();
 
   return (
     <View style={ styles.root }>
@@ -193,18 +89,18 @@ const styles = StyleSheet.create({
   },
   alignCenter: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
   },
   listItem: {
-    backgroundColor: '#000',
+    backgroundColor: '#000000',
     padding: 10,
     marginVertical: 5,
     marginHorizontal: 5,
   },
   listItemTitle: {
-    color: '#FFF',
+    color: '#FFFFFF',
     fontSize: 18,
   },
 });

@@ -10,7 +10,7 @@ export const Net = async (api, params) => {
   return await instance.post(api, params)
   .then(function (response) {
     console.log(response.data);
-    return response;
+    // return response;
   })
   .catch(function (error) {
     console.log(error);
