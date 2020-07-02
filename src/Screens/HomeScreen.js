@@ -26,7 +26,7 @@ function HomeScreen(props) {
           for (let i=0 ;i<res.response.records.length; i++) {
             var dateTime = res.response.records[i].date_time.substring(0, 10);
             let clinic = {
-              id: itemCount,
+              id: i,
               doctorName: res.response.records[i].doctor_name,
               patientName: res.response.records[i].patient_name,
               diagnosis: res.response.records[i].diagnosis,
@@ -36,13 +36,11 @@ function HomeScreen(props) {
               followUpConsultation: res.response.records[i].follow_up_consultation,
             }
             
-            // console.log(res.response.records[i].date_time);
           if (!items[dateTime]) {
-            // console.log(res.response.records[i]);
             items[dateTime] = [];
           }
             items[dateTime].push(clinic);
-          // }
+
             clinicList.push(clinic);
           }
           console.log(items);
@@ -52,8 +50,7 @@ function HomeScreen(props) {
         }
       })
       .catch(err => {
-        // alert('Something went wrong');
-        alert(err);
+        alert('Something went wrong');
       })
   }
 
@@ -124,7 +121,7 @@ function HomeScreen(props) {
           return (
           <TouchableOpacity
             style={ styles.listItem }
-            onPress={() => props.navigation.navigate('Record', {id: item.id, doctorName: item.doctorName, patientName: item.patientName})}
+            onPress={() => props.navigation.navigate('Record', {item: item})}
             // onPress={() => console.log(item.name)}
           >
             <Text>{'Doctor Name: ' + item.doctorName}</Text>
