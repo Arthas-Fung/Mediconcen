@@ -27,6 +27,7 @@ export default RecordScreen;
 const styles = StyleSheet.create({
   root: {
     width: '100%',
+    height: '100%',
     padding: 15,
   },
   alignCenter: {

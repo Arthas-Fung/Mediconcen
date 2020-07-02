@@ -85,6 +85,7 @@ export default RegisterScreen;
 const styles = StyleSheet.create({
   root: {
     width: '100%',
+    height: '100%',
     padding: 15,
   },
   alignCenter: {
