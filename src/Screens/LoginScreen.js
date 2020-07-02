@@ -23,10 +23,18 @@ function LoginScreen(props) {
   }
 
   const apiLogin = () => {
-    Net('/posts', { 
-      email: email, 
-      password: password })
+    Net('/posts', {
+      params: { 
+        _start: 0, 
+        _limit: 2,
+        // email: email, 
+        // password: password,
+      }
+    })
       .then(res => {
+        console.log(res[0].title);
+        console.log(res[0].id);
+
         props.navigation.replace('Home');
       })
       .catch(err => {
