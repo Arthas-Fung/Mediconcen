@@ -27,14 +27,21 @@ function RegisterScreen(props) {
   }
 
   const apiRegister = () => {
-    Net('/posts', { 
-      email: email, 
-      password: password, 
-      clinicName: clinicName, 
-      phoneNumber: phoneNumber, 
-      address: address })
+    Net('/user_register.php', { 
+      params: { 
+        loginEmail: email, 
+        loginPassword: password, 
+        clinicName: clinicName, 
+        phoneNumber: phoneNumber, 
+        address: address
+      }
+    })
       .then(res => {
-        props.navigation.goBack();
+        if (res.meta.code == 200) {
+          props.navigation.goBack();
+        } else {
+          alert('code' + res.meta.code + ': ' + res.meta.message);
+        }
       })
       .catch(err => {
         alert('Something went wrong');

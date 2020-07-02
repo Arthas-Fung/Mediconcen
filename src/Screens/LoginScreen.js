@@ -23,19 +23,18 @@ function LoginScreen(props) {
   }
 
   const apiLogin = () => {
-    Net('/posts', {
+    Net('/user_login.php', {
       params: { 
-        _start: 0, 
-        _limit: 2,
-        // email: email, 
-        // password: password,
+        loginEmail: email, 
+        loginPassword: password,
       }
     })
       .then(res => {
-        console.log(res[0].title);
-        console.log(res[0].id);
-
-        props.navigation.replace('Home');
+        if (res.meta.code == 200) {
+          props.navigation.replace('Home');
+        } else {
+          alert('code' + res.meta.code + ': ' + res.meta.message);
+        }
       })
       .catch(err => {
         alert('Something went wrong');

@@ -1,9 +1,9 @@
 <?php
-include 'settings.php';
+include_once("settings.php");
 
 $conn = connect();
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+	die("Connection failed: " . $conn->connect_error);
 }
 
 $sql = "SELECT doctor_name, patient_name, diagnosis, medication, consultation_fee, date_time, follow_up_consultation

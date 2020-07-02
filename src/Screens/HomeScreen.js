@@ -8,13 +8,54 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import { Net, } from '../httpClient/request'
+import { Agenda, } from 'react-native-calendars';
 
 var itemCount = 0;
 
-const HomeScreen = props => {
+function HomeScreen(props) {
   let [refresh, setRefresh] = useState(false);
   let clinicList = [];
+  const [items, setItems] = useState({});
+
+  const apiGetRecord = () => {
+    Net('/get_consultation_records.php')
+      .then(res => {
+        if (res.meta.code == 200) {
+  
+          for (let i=0 ;i<res.response.records.length; i++) {
+            var dateTime = res.response.records[i].date_time.substring(0, 10);
+            let clinic = {
+              id: itemCount,
+              doctorName: res.response.records[i].doctor_name,
+              patientName: res.response.records[i].patient_name,
+              diagnosis: res.response.records[i].diagnosis,
+              medication: res.response.records[i].medication,
+              consultationFee: res.response.records[i].consultation_fee,
+              dateTime: dateTime, 
+              followUpConsultation: res.response.records[i].follow_up_consultation,
+            }
+            
+            // console.log(res.response.records[i].date_time);
+          if (!items[dateTime]) {
+            // console.log(res.response.records[i]);
+            items[dateTime] = [];
+          }
+            items[dateTime].push(clinic);
+          // }
+            clinicList.push(clinic);
+          }
+          console.log(items);
+  
+        } else {
+          alert('code' + res.meta.code + ': ' + res.meta.message);
+        }
+      })
+      .catch(err => {
+        // alert('Something went wrong');
+        alert(err);
+      })
+  }
 
   const ListItem = ({ item }) => {
     return (
@@ -60,19 +101,19 @@ const HomeScreen = props => {
     }
   }
 
-  initClinicList();
+  apiGetRecord();
 
   return (
     <View style={ styles.root }>
       <Agenda
-        items={{
-          '2020-07-01': [{id: 1, doctorName: 'Tom', patientName: 'Cherry'}],
-          '2020-07-02': [{id: 2, doctorName: 'Mary', patientName: 'Arthur'}],
-          '2020-07-03': [{id: 3, doctorName: 'Peter', patientName: 'Ben'},
-            {id: 4, doctorName: 'Sally', patientName: 'David'}, 
-            {id: 4, doctorName: 'Jack', patientName: 'Brian'}]
-        }}
-
+        // items={{
+          // '2020-07-01': [{id: 1, doctorName: 'Tom', patientName: 'Cherry'}],
+          // '2020-07-02': [{id: 2, doctorName: 'Mary', patientName: 'Arthur'}],
+          // '2020-07-03': [{id: 3, doctorName: 'Peter', patientName: 'Ben'},
+          //   {id: 4, doctorName: 'Sally', patientName: 'David'}, 
+          //   {id: 4, doctorName: 'Jack', patientName: 'Brian'}]
+        // }}
+        items={items}
         loadItemsForMonth={(month) => {console.log('trigger items loading')}}
         onCalendarToggled={(calendarOpened) => {console.log(calendarOpened)}}
         onDayPress={(day)=>{console.log('day pressed')}}

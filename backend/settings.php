@@ -2,9 +2,9 @@
 
 function connect() {
 	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "mediconcen";
+	$username = "id14246893_admin";
+	$password = "JxU\#_b(9s}xZkyj";
+	$dbname = "id14246893_mediconcen";
 	
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	if ($conn->connect_error) {
@@ -15,4 +15,3 @@ function connect() {
 }
 
 ?>
-
